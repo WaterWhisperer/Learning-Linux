@@ -1,0 +1,3 @@
+/home/water/桌面/Learn/Linux/C/build/CMakeFiles/hello.dir
+/home/water/桌面/Learn/Linux/C/build/CMakeFiles/edit_cache.dir
+/home/water/桌面/Learn/Linux/C/build/CMakeFiles/rebuild_cache.dir
