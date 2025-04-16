@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-CONFIG_FILE="/home/water/桌面/Learn/Linux/website-monitor/config.txt"
+CONFIG_FILE="config.txt"
 LOG_DIR="logs"
 DATA_DIR="data"
 
