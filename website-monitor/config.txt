@@ -1,0 +1,4 @@
+# 网站监控配置文件
+# 格式：网站名称 URL
+Baidu https://www.baidu.com
+MyWebSite http://localhost:80
