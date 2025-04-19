@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-CONFIG_FILE="config.txt"
+CONFIG_FILE="website-monitor/config.txt"
 LOG_DIR="logs"
 DATA_DIR="data"
 
