@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/hello.dir/main.c.o CMakeFiles/hello.dir/message.c.o -o hello 
