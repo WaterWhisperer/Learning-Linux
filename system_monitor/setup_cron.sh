@@ -30,3 +30,6 @@ sudo systemctl restart cron
 
 echo "定时任务设置完成"
 echo "监控日志将保存到: $PROJECT_DIR/logs/cron.log"
+echo -e "\n定时任务管理命令："
+echo "启动监控: ./setup_cron.sh"
+echo "停止监控: ./stop_cron.sh"
