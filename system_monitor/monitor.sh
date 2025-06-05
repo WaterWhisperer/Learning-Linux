@@ -7,6 +7,13 @@ set -euo pipefail
 CONFIG_FILE="monitor.conf"
 [ -f "$CONFIG_FILE" ] && source "$CONFIG_FILE"
 
+# 检查依赖
+echo "检查系统依赖..." >> "$LOG_FILE"
+./check_dependencies.sh >> "$LOG_FILE" 2>&1 || {
+    echo "依赖检查失败，请检查日志！" >> "$LOG_FILE"
+    exit 1
+}
+
 # 配置参数
 DATA_FILE=${DATA_FILE:-"system_metrics.csv"}
 LOG_FILE=${LOG_FILE:-"monitor.log"}
