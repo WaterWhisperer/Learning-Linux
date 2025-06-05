@@ -1,8 +1,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import os
+import pytz
 
 def generate_report():
     # 检查数据文件是否存在
@@ -18,16 +19,17 @@ def generate_report():
         print("错误: 数据文件为空")
         return
     
-    # 转换时间戳
-    df['timestamp'] = pd.to_datetime(df['timestamp'])
+    # 转换时间戳并确保使用UTC时区
+    df['timestamp'] = pd.to_datetime(df['timestamp'], utc=True)
     df['time'] = df['timestamp'].dt.strftime('%H:%M')
     
     # 创建图表 - 使用3列布局
     plt.figure(figsize=(16, 10))
     sns.set_style("darkgrid")
     
-    # 获取最近24小时数据
-    now = datetime.now()
+    # 获取最近24小时数据（使用UTC时区）
+    utc = pytz.UTC
+    now = datetime.now(utc)
     one_day_ago = now - timedelta(days=1)
     recent_df = df[df['timestamp'] >= one_day_ago]
     
@@ -111,9 +113,9 @@ def generate_report():
     <body>
         <h1>System Performance Report</h1>
         <div class="report-info">
-            <p>Generated at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</p>
+            <p>Generated at: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')} UTC</p>
             <p>Data points: {len(df)}</p>
-            <p>Time range: {df['timestamp'].min().strftime('%Y-%m-%d %H:%M')} - {df['timestamp'].max().strftime('%Y-%m-%d %H:%M')}</p>
+            <p>Time range: {df['timestamp'].min().strftime('%Y-%m-%d %H:%M')} - {df['timestamp'].max().strftime('%Y-%m-%d %H:%M')} UTC</p>
         </div>
         
         <img src="system_metrics.png" alt="System Metrics">
@@ -142,14 +144,14 @@ def generate_report():
         <h2>Latest Metrics (Last 10 entries)</h2>
         <table>
             <tr>
-                <th>Timestamp</th>
+                <th>Timestamp (UTC)</th>
                 <th>CPU (%)</th>
                 <th>Memory (%)</th>
                 <th>Disk (%)</th>
             </tr>
             {''.join(f'''
             <tr>
-                <td>{row['timestamp']}</td>
+                <td>{row['timestamp'].strftime('%Y-%m-%d %H:%M:%S')}</td>
                 <td>{row['cpu']:.2f}</td>
                 <td>{row['memory']:.2f}</td>
                 <td>{row['disk']:.2f}</td>

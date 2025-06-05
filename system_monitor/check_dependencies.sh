@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # 系统监控工具 - 依赖检查脚本
-# 版本: 1.0
 
 # 检查Python依赖
 echo "=== Python依赖检查 ==="
 python3 -c "
-import pandas, matplotlib, seaborn
+import pandas, matplotlib, seaborn, pytz
 print('依赖检查通过:')
 print(f'pandas版本: {pandas.__version__}')
 print(f'matplotlib版本: {matplotlib.__version__}')
 print(f'seaborn版本: {seaborn.__version__}')
+print(f'pytz版本: {pytz.__version__}')
 " 2>/dev/null
 
 if [ $? -ne 0 ]; then
