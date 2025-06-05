@@ -77,11 +77,15 @@ chmod +x check_dependencies.sh monitor.sh
 ./monitor.sh
 ```
 
-### 设置定时任务
+### 定时任务管理
 
 ```bash
-chmod +x setup_cron.sh
+# 设置定时监控
+chmod +x setup_cron.sh stop_cron.sh
 ./setup_cron.sh
+
+# 停止定时监控
+./stop_cron.sh
 
 # 验证定时任务
 crontab -l
@@ -112,7 +116,7 @@ crontab -l
    sudo yum groupinstall "Development Tools"
    sudo yum install python3-pip
 
-   pip3 install pandas seaborn matplotlib==3.7.0
+   pip3 install pandas seaborn matplotlib==3.7.0 pytz
    ```
 
 4. **测试运行**：
@@ -121,13 +125,23 @@ crontab -l
    ./monitor.sh
    ```
 
-5. **设置定时任务**：
+5. **验证报告生成**：
+
+   ```bash
+   # 查看最新报告
+   ls -lt reports/
+
+   # 查看日志
+   tail monitor.log
+   ```
+
+6. **设置定时任务**：
 
    ```bash
    ./setup_cron.sh
    ```
 
-6. **验证定时任务**：
+7. **验证定时任务**：
 
    ```bash
    crontab -l
@@ -163,12 +177,13 @@ crontab -l
 
 ```plaintext
 system_monitor/
-├── check_dependencies.sh # 依赖检查脚本
-├── generate_report.py    # 报告生成脚本
-├── monitor.conf          # 配置文件
-├── monitor.sh            # 主监控脚本
-├── README.md             # 项目文档
-├── reports/              # 报告输出目录
-├── setup_cron.sh         # 定时任务设置脚本
-└── system_monitor.cpp    # 数据采集程序
+├── check_dependencies.sh  # 依赖检查脚本
+├── generate_report.py     # 报告生成脚本
+├── monitor.conf           # 配置文件
+├── monitor.sh             # 主监控脚本
+├── README.md              # 项目文档
+├── reports/               # 报告输出目录
+├── setup_cron.sh          # 启动定时任务
+├── stop_cron.sh           # 停止定时任务
+└── system_monitor.cpp     # 数据采集程序
 ```
